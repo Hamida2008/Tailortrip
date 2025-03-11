@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://127.0.0.1:5500/index.html -->
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        color: white;
+      }
+
+      .video-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: -1;
+      }
+
+      video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        transform: translate(-50%, -50%);
+      }
+
+      .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 100;
+      }
+
+      .header a {
+        color: white;
+        text-decoration: none;
+        font-size: 20px;
+        padding-bottom: 5px;
+        transition: color 0.3s ease;
+      }
+
+      .header a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        background: white;
+        left: 50%;
+        bottom: 0;
+        transition: 0.3s;
+      }
+      .header a:hover::after {
+        width: 100%;
+        left: 0;
+      }
+
+      .welcome-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+        font-size: 50px;
+        font-weight: bold;
+        text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+      }
+
+      .subtext {
+        font-size: 24px;
+        font-weight: normal;
+        margin-top: 10px;
+      }
+
+      .second-page {
+        display: flex;
+        justify-content: space-around;
+        background: white;
+        color: black;
+        padding: 100px 20px;
+        text-align: center;
+        margin-top: 100vh;
+      }
+
+      .title {
+        font-size: 40px;
+        font-weight: bold;
+      }
+
+      .content {
+        font-size: 18px;
+        max-width: 800px;
+        margin: 20px auto;
+      }
+
+      .awards img {
+        margin-top: 90px;
+        max-width: 200px;
+        margin: 20px;
+      }
+      .image img {
+        width: 400px;
+      }
+
+      .section {
+        margin: 0;
+        padding: 0;
+        background-color: #2e3b2f; /* Жасыл фон */
+        color: white;
+        font-family: Arial, sans-serif;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        padding: 50px;
+      }
+
+      .image-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .image-container img {
+        max-width: 80%;
+        height: auto;
+      }
+
+      .text-container {
+        flex: 1;
+        max-width: 600px;
+      }
+
+      .text-container h2 {
+        font-size: 32px;
+        margin-bottom: 10px;
+      }
+
+      .text-container p {
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      /* Аккордеон стилі */
+      .accordion {
+        margin-top: 100vh;
+        background: white;
+        color: black;
+        padding: 20px;
+      }
+
+      /* Телефон (макс. 768px) */
+      @media (max-width: 768px) {
+        .header {
+          flex-direction: column;
+          align-items: center;
+          gap: 10px;
+          padding: 15px;
+        }
+
+        .header a {
+          font-size: 18px;
+        }
+
+        .welcome-text {
+          font-size: 30px;
+          width: 90%;
+          text-align: center;
+        }
+
+        .subtext {
+          font-size: 18px;
+        }
+
+        .second-page {
+          flex-direction: column;
+          text-align: center;
+          padding: 50px 10px;
+        }
+
+        .image img {
+          width: 90%;
+        }
+
+        .section {
+          flex-direction: column;
+          height: auto;
+          padding: 30px 10px;
+        }
+
+        .image-container img {
+          max-width: 90%;
+        }
+
+        .text-container {
+          max-width: 100%;
+          text-align: center;
+        }
+
+        .text-container h2 {
+          font-size: 24px;
+        }
+
+        .text-container p {
+          font-size: 16px;
+        }
+      }
+
+      /* Планшет (768px - 1024px) */
+      @media (min-width: 769px) and (max-width: 1024px) {
+        .header {
+          padding: 15px;
+        }
+
+        .header a {
+          font-size: 20px;
+        }
+
+        .welcome-text {
+          font-size: 40px;
+        }
+
+        .subtext {
+          font-size: 20px;
+        }
+
+        .second-page {
+          padding: 80px 20px;
+        }
+
+        .image img {
+          width: 80%;
+        }
+
+        .section {
+          padding: 50px 20px;
+        }
+
+        .image-container img {
+          max-width: 70%;
+        }
+
+        .text-container h2 {
+          font-size: 28px;
+        }
+
+        .text-container p {
+          font-size: 18px;
+        }
+      }
+
+      /* Үлкен экрандар (1025px+) */
+      @media (min-width: 1025px) {
+        .header {
+          padding: 20px;
+        }
+
+        .header a {
+          font-size: 22px;
+        }
+
+        .welcome-text {
+          font-size: 50px;
+        }
+
+        .subtext {
+          font-size: 24px;
+        }
+
+        .second-page {
+          padding: 100px 30px;
+        }
+
+        .image img {
+          width: 70%;
+        }
+
+        .section {
+          padding: 70px 30px;
+        }
+
+        .image-container img {
+          max-width: 60%;
+        }
+
+        .text-container h2 {
+          font-size: 32px;
+        }
+
+        .text-container p {
+          font-size: 20px;
+        }
+      }
+
+      /* футер */
+
+      .footer {
+        background: #1a0c0c;
+        color: #fff;
+        padding: 40px 20px;
+        font-family: Arial, sans-serif;
+      }
+
+      .footer-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .newsletter {
+        flex: 1;
+        min-width: 300px;
+        max-width: 400px;
+      }
+
+      .newsletter h3 {
+        font-size: 14px;
+        text-transform: uppercase;
+        opacity: 0.8;
+      }
+
+      .newsletter p {
+        font-size: 20px;
+      }
+
+      .newsletter form {
+        display: flex;
+        margin-top: 10px;
+      }
+
+      .newsletter input {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 5px 0 0 5px;
+      }
+
+      .newsletter button {
+        padding: 10px 15px;
+        background: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 0 5px 5px 0;
+      }
+
+      .privacy {
+        font-size: 12px;
+        opacity: 0.6;
+        margin-top: 10px;
+      }
+
+      .social-icons {
+        margin-top: 15px;
+      }
+
+      .social-icons a {
+        color: #fff;
+        margin-right: 10px;
+        font-size: 20px;
+        text-decoration: none;
+      }
+
+      .footer-links {
+        display: flex;
+        flex: 2;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .column {
+        min-width: 150px;
+        margin-top: 20px;
+      }
+
+      .column h4 {
+        font-size: 14px;
+        text-transform: uppercase;
+        opacity: 0.8;
+      }
+
+      .column a,
+      .column p {
+        display: block;
+        color: #fff;
+        text-decoration: none;
+        font-size: 14px;
+        margin-top: 5px;
+      }
+
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 30px auto 0;
+        font-size: 14px;
+        opacity: 0.7;
+        flex-wrap: wrap;
+      }
+
+      .footer-bottom a {
+        color: #fff;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="video-container">
+      <video autoplay="" loop="" muted="">
+        <source src="Landscapes-Homepage-3.mp4" type="video/mp4" />
+      </video>
+    </div>
+
+    <div class="header">
+      <a href="index.html">Home</a>
+      <a href="travel.html">Journeys</a>
+      <a href="weather.html">Weather</a>
+      <a href="Team.html">Team</a>
+    </div>
+
+    <div class="welcome-text">
+      WELCOME THE TAILOR
+      <div class="subtext">Australia – the place of your dream journey!</div>
+    </div>
+
+    <!-- 2бет -->
+    <div class="second-page">
+      <div class="LEFT">
+        <p class="subtitle">YOUR TRIP IS 100% TAILORED TO YOUR NEEDS</p>
+        <h1 class="title">Luxury travel Australia <i>in style</i></h1>
+        <p class="content">
+          At The Tailor, we pride ourselves on two core values: excellence and
+          authenticity. Every journey we create is a seamless blend of
+          thoughtful planning, unique experiences, and personalised touches.
+          Whether uncovering lesser-known destinations or reimagining iconic
+          landmarks with fresh perspectives, we ensure every moment is truly
+          memorable.
+        </p>
+        <p class="content">
+          The Tailor’s team of Travel Designers are trained in the fine art of
+          taking your aspirations, noting your specific needs and designing
+          something very special, delivering an experience that’s entirely
+          yours.
+        </p>
+        <div class="awards">
+          <img src="Tailor-Blk21.png.webp" alt="Award 1" />
+          <img src="Tailor-Blk1.png.webp" alt="Award 2" />
+          <img src="Serandipians-Tailor-Blk1.png.webp" alt="Award 3" />
+        </div>
+      </div>
+      <div class="image">
+        <img
+          src="https://thetailor.com/wp-content/uploads/2024/11/15.-Breakfast-with-the-Kangaroos-768x1024.jpg.webp"
+          alt="Kangaroo in Australia"
+        />
+      </div>
+    </div>
+    <!-- 3бет -->
+    <div class="section">
+      <div class="image-container">
+        <img src="Thread.svg" alt="Needle Image" />
+      </div>
+      <div class="text-container">
+        <h2>Excellence</h2>
+        <p>
+          We carefully select world-class, privileged access destinations,
+          experiences, and connections from our black book to best suit your
+          journey.
+        </p>
+
+        <h2>Authenticity</h2>
+        <p>
+          Every journey is hand-crafted and navigated from conception to
+          conclusion by memory-making experts, ensuring a flexible itinerary
+          that adapts to you.
+        </p>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="newsletter">
+          <h3>NEWSLETTER</h3>
+
+          <div class="social-icons">
+            <a href="https://www.facebook.com/TheTailorTravel/">facebook</a>
+            <a href="https://www.youtube.com/user/thetailortravel">youtube</a>
+            <a href="https://www.linkedin.com/company/thetailor/">linkedin</a>
+            <a href="https://www.instagram.com/TheTailorTravel/">instagram</a>
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <div class="column">
+            <h4>EXPLORE</h4>
+            <a href="#">Destinations</a>
+            <a href="#">Experiences</a>
+            <a href="#">Journeys</a>
+            <a href="#">Stories & News</a>
+          </div>
+          <div class="column">
+            <h4>LEARN</h4>
+            <a href="index.html">About Us</a>
+            <a href="#">Awards</a>
+            <a href="#">Organisations We Support</a>
+            <a href="Team.html">Our Team</a>
+            <a href="weather.html">Weather</a>
+            <a href="travel.html">The Tailor Process</a>
+            <a href="index.html">Why Travel with Us</a>
+          </div>
+          <div class="column">
+            <h4>CONTACT</h4>
+            <p>1300 364 406 (Free call)</p>
+            <p>+61 (0)8 8354 4405</p>
+            <a href="mailto:info@thetailor.com">info@thetailor.com</a>
+          </div>
+          <div class="column">
+            <h4>RESOURCES</h4>
+            <a href="#">Agents Info</a>
+            <a href="#">Careers</a>
+            <a href="#">Responsible Australian Travel</a>
+          </div>
+          <div class="column">
+            <h4>ADDRESS</h4>
+            <a
+              href="https://www.google.com/maps/place/The+Tailor/@-34.9475783,138.5523708,724m/data=!3m3!1e3!4b1!5s0x6ab0c5864019daeb:0x5fa7bacdadb30cbb!4m6!3m5!1s0x6ab0cf4e5eee9a5f:0x5f90915aa6061b03!8m2!3d-34.9475783!4d138.5523708!16s%2Fg%2F1trxdv1l?entry=ttu&g_ep=EgoyMDI1MDMwNC4wIKXMDSoASAFQAw%3D%3D"
+              >3 / 262 Marion Road</a
+            >
+            <p>Netley, South Australia, 5037 Australia</p>
+            <p>Mon-Fri 08:30 - 17:00 (ACST)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2024 The Tailor</p>
+        <a href="#">Terms + Conditions</a>
+        <p>Website by Hamida</p>
+      </div>
+    </footer>
+
+    <!-- скрип -->
+    <script>
+      if ("WebSocket" in window) {
+        (function () {
+          function refreshCSS() {
+            var sheets = [].slice.call(document.getElementsByTagName("link"));
+            var head = document.getElementsByTagName("head")[0];
+            for (var i = 0; i < sheets.length; ++i) {
+              var elem = sheets[i];
+              var parent = elem.parentElement || head;
+              parent.removeChild(elem);
+              var rel = elem.rel;
+              if (
+                (elem.href && typeof rel != "string") ||
+                rel.length == 0 ||
+                rel.toLowerCase() == "stylesheet"
+              ) {
+                var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, "");
+                elem.href =
+                  url +
+                  (url.indexOf("?") >= 0 ? "&" : "?") +
+                  "_cacheOverride=" +
+                  new Date().valueOf();
+              }
+              parent.appendChild(elem);
+            }
+          }
+          var protocol =
+            window.location.protocol === "http:" ? "ws://" : "wss://";
+          var address =
+            protocol + window.location.host + window.location.pathname + "/ws";
+          var socket = new WebSocket(address);
+          socket.onmessage = function (msg) {
+            if (msg.data == "reload") window.location.reload();
+            else if (msg.data == "refreshcss") refreshCSS();
+          };
+          if (
+            sessionStorage &&
+            !sessionStorage.getItem("IsThisFirstTime_Log_From_LiveServer")
+          ) {
+            console.log("Live reload enabled.");
+            sessionStorage.setItem("IsThisFirstTime_Log_From_LiveServer", true);
+          }
+        })();
+      } else {
+        console.error(
+          "Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading."
+        );
+      }
+    </script>
+  </body>
+</html>
